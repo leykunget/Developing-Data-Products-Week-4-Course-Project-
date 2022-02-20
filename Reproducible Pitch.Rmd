@@ -1,0 +1,79 @@
+
+---
+title: "Analysis of mtcars data"
+author: "Leykun Getaneh"
+date: "2/20/2022"
+output:
+  slidy_presentation: default
+  html_document:
+    number_sections: yes
+    toc: yes
+  ioslides_presentation: default
+mode: selfcontained
+job: Reproducible Pitch Presentation
+highlighter: highlight.js
+widgets: bootstrap
+---
+
+## Reproducible Pitch
+
+In this project, I prepared a shiny application and the link is :
+
+https://likuta.shinyapps.io/developing_data_products_week_4_assignment/?_ga=2.263236559.276545136.1645386714-1215946911.1645386714
+
+And also, the codes of ui.R and server.R are on the link:
+
+https://github.com/leykunget/Developing-Data-Products-Week-4-Course-Project-
+
+
+## Overview of mtcars Dataset
+
+### Motor Trend Car Road Tests
+
+- The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models).
+
+- A data frame with 32 observations on 11 variables.
+
+```{r}
+head(mtcars, 4)
+```
+
+## UI code
+
+```r
+library(shiny)
+
+shinyUI(
+navbarPage("Developing Data Products Week 4 Assignment",
+  tabPanel("Simple Regression Analysis",
+  (fluidPage(
+    titlePanel("Estimate Miles per Gallon (mpg) with Simple Regression Models (SRM)"),
+    sidebarLayout(
+     sidebarPanel(
+        selectInput("variable", "Select Independent variables for SRM",
+                c('cyl', 'disp', 'hp', 'drat','wt', 'qsec', 'vs', 'am', 'gear', 'carb')),
+        checkboxInput("simple_model","show the model", value=FALSE),
+        submitButton("Submit")
+                                    
+    ), # ...
+    
+```
+
+ 
+## Server Code 
+
+```r
+library(shiny)
+library(ggplot2)
+library(olsrr)
+data(mtcars)
+
+mtcars$cyl <- factor(mtcars$cyl)
+mtcars$vs <- factor(mtcars$vs)
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+mtcars$am <- factor(mtcars$am,labels=c("Automatic","Manual"))
+
+#...
+```
+
